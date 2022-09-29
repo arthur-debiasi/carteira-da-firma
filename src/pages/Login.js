@@ -1,10 +1,15 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import newLogin from '../redux/actions';
 
 class Login extends React.Component {
   state = {
     email: '',
     password: '',
     isBtnDisabled: true,
+    isRedirect: false,
   };
 
   buttonValidation = () => {
@@ -24,10 +29,18 @@ class Login extends React.Component {
     this.setState({ [name]: value }, () => this.buttonValidation());
   };
 
+  handleClick = () => {
+    const { email } = this.state;
+    const { emailDispatch } = this.props;
+    emailDispatch(email);
+    this.setState({ isRedirect: true });
+  };
+
   render() {
-    const { email, password, isBtnDisabled } = this.state;
+    const { email, password, isBtnDisabled, isRedirect } = this.state;
+    if (isRedirect) return <Redirect to="/carteira" />;
     return (
-      <div>
+      <form>
         <label htmlFor="email-input">
           E-mail:
           {' '}
@@ -55,12 +68,21 @@ class Login extends React.Component {
         <button
           type="button"
           disabled={ isBtnDisabled }
+          onClick={ this.handleClick }
         >
           Entrar
         </button>
-      </div>
+      </form>
     );
   }
 }
 
-export default Login;
+Login.propTypes = {
+  emailDispatch: PropTypes.func,
+}.isRequired;
+
+const mapDispatchToProps = (dispatch) => ({
+  emailDispatch: (state) => dispatch(newLogin(state)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
