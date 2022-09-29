@@ -6,13 +6,10 @@ import Wallet from './pages/Wallet';
 export default class App extends Component {
   render() {
     return (
-      <>
-        <h1>Carteira da Firma</h1>
-        <Switch>
-          <Route exact path="/" component={ Login } />
-          <Route path="/carteira" component={ Wallet } />
-        </Switch>
-      </>
+      <Switch>
+        <Route exact path="/" component={ Login } />
+        <Route path="/carteira" component={ Wallet } />
+      </Switch>
     );
   }
 }
