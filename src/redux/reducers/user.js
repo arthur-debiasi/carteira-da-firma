@@ -8,8 +8,7 @@ const NEW_EMAIL = 'NEW_EMAIL';
 function user(state = INITIAL_STATE, action) {
   switch (action.type) {
   case NEW_EMAIL:
-    console.log(action.state);
-    return { ...state, email: action.state };
+    return { ...state, email: action.payload };
   default:
     return state;
   }

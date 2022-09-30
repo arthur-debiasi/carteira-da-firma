@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class WalletForm extends Component {
   state = {
@@ -8,12 +10,24 @@ class WalletForm extends Component {
     tag: 'food',
   };
 
+  async componentDidMount() {
+    // const END_POINT = 'https://economia.awesomeapi.com.br/json/all';
+    // let data = [];
+    // try {
+    //   data = await fetch(END_POINT);
+    //   delete data.USDT;
+    // } catch (error) {
+    //   data = ['failed request'];
+    // }
+  }
+
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
   };
 
   render() {
     const { value, description, payment, tag } = this.state;
+    const { currencies } = this.props;
     return (
       <form>
         <label htmlFor="value-input">
@@ -38,6 +52,19 @@ class WalletForm extends Component {
             value={ description }
             onChange={ this.handleChange }
           />
+        </label>
+        <label htmlFor="currency-input">
+          Moeda:
+          {' '}
+          <select
+            name="currency"
+            // value={ currency }
+            data-testid="currency-input"
+            id="currency-input"
+            // onChange={ this.handleChange }
+          >
+            { currencies.map((e) => (<option key="" value="cash">{e}</option>))}
+          </select>
         </label>
         <label htmlFor="method-input">
           Método de pagamento:
@@ -76,4 +103,14 @@ class WalletForm extends Component {
   }
 }
 
-export default WalletForm;
+WalletForm.propTypes = {
+  currencies: PropTypes.shape({
+    map: PropTypes.func,
+  }),
+}.isRequired;
+
+const mapStateToProps = (state) => ({
+  currencies: state.wallet.currencies,
+});
+
+export default connect(mapStateToProps)(WalletForm);
