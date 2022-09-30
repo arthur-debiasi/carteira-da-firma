@@ -3,6 +3,7 @@ const NEW_EMAIL = 'NEW_EMAIL';
 const TRY_REQUEST = 'TRY_REQUEST';
 const FETCH_API = 'FETCH_API';
 const GOT_RESPONSE = 'GOT_RESPONSE';
+const ADD_EXPENSE = 'ADD_EXPENSE';
 
 const newLogin = (payload) => ({ type: NEW_EMAIL, payload });
 
@@ -25,4 +26,6 @@ const fetchCurrency = () => async (dispatch) => {
   }
 };
 
-export { newLogin, fetchCurrency };
+const addExpense = (payload) => ({ type: ADD_EXPENSE, payload });
+
+export { newLogin, fetchCurrency, addExpense };

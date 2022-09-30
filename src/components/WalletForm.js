@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { addExpense } from '../redux/actions';
 
 class WalletForm extends Component {
   state = {
@@ -8,25 +9,20 @@ class WalletForm extends Component {
     description: '',
     payment: 'cash',
     tag: 'food',
+    currency: 'USD',
   };
-
-  async componentDidMount() {
-    // const END_POINT = 'https://economia.awesomeapi.com.br/json/all';
-    // let data = [];
-    // try {
-    //   data = await fetch(END_POINT);
-    //   delete data.USDT;
-    // } catch (error) {
-    //   data = ['failed request'];
-    // }
-  }
 
   handleChange = ({ target: { name, value } }) => {
     this.setState({ [name]: value });
   };
 
+  handleClick = () => {
+    const { expenseDispatch } = this.props;
+    expenseDispatch(this.state);
+  };
+
   render() {
-    const { value, description, payment, tag } = this.state;
+    const { value, description, payment, tag, currency } = this.state;
     const { currencies } = this.props;
     return (
       <form>
@@ -58,12 +54,12 @@ class WalletForm extends Component {
           {' '}
           <select
             name="currency"
-            // value={ currency }
+            value={ currency }
             data-testid="currency-input"
             id="currency-input"
-            // onChange={ this.handleChange }
+            onChange={ this.handleChange }
           >
-            { currencies.map((e) => (<option key="" value="cash">{e}</option>))}
+            { currencies.map((e) => (<option key={ e } value={ e }>{e}</option>))}
           </select>
         </label>
         <label htmlFor="method-input">
@@ -98,6 +94,7 @@ class WalletForm extends Component {
             <option value="health">Saúde</option>
           </select>
         </label>
+        <button type="button" onClick={ this.handleClick }>Adicionar Despesa</button>
       </form>
     );
   }
@@ -113,4 +110,8 @@ const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
 });
 
-export default connect(mapStateToProps)(WalletForm);
+const mapDispatchToProps = (dispatch) => ({
+  expenseDispatch: (state) => dispatch(addExpense(state)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);
