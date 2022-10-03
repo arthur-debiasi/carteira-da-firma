@@ -6,15 +6,23 @@ const INITIAL_STATE = {
   idToEdit: 0, // valor numérico que armazena o id da despesa que esta sendo editada
 };
 
+const TRY_REQUEST = 'TRY_REQUEST';
 const FETCH_API = 'FETCH_API';
-const ADD_EXPENSE = 'ADD_EXPENSE';
+const FETCH_QUOTATION = 'FETCH_QUOTATION';
+const GOT_RESPONSE = 'GOT_RESPONSE';
 
 function wallet(state = INITIAL_STATE, action) {
   switch (action.type) {
+  case TRY_REQUEST:
+    console.log('tentativa de requisição...');
+    return state;
+  case GOT_RESPONSE:
+    console.log('sucesso de requisição!');
+    return state;
   case FETCH_API:
     return { ...state, currencies: action.payload };
-  case ADD_EXPENSE:
-    return { ...state, expenses: action.payload };
+  case FETCH_QUOTATION:
+    return { ...state, expenses: [...state.expenses, action.payload] };
   default:
     return state;
   }
