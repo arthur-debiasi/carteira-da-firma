@@ -5,7 +5,7 @@ import { fetchCurrency, fetchQuotation } from '../redux/actions';
 
 class WalletForm extends Component {
   state = {
-    value: '',
+    value: 0,
     description: '',
     method: 'cash',
     tag: 'food',

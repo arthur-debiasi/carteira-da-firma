@@ -40,6 +40,7 @@ const fetchQuotation = (expense) => async (dispatch) => {
     dispatch(fetchCurrencies(expense));
     dispatch(gotResponse());
   } catch (e) {
+    console.log(e);
     throw new Error(e);
   }
 };
