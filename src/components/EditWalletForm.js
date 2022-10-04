@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchCurrency, fetchQuotation } from '../redux/actions';
 
-class WalletForm extends Component {
+class EditWalletForm extends Component {
   state = {
     value: '',
     description: '',
@@ -14,6 +14,8 @@ class WalletForm extends Component {
   };
 
   componentDidMount() {
+    // const { expenses } = this.props;
+    this.setState({});
     const { currenciesDispatch } = this.props;
     currenciesDispatch();
   }
@@ -30,8 +32,8 @@ class WalletForm extends Component {
     this.setState({
       value: '',
       description: '',
-      method: 'Dinheiro',
-      tag: 'Alimentação',
+      method: 'cash',
+      tag: 'food',
       currency: 'USD',
       id: id + 1,
     });
@@ -116,7 +118,7 @@ class WalletForm extends Component {
   }
 }
 
-WalletForm.propTypes = {
+EditWalletForm.propTypes = {
   currencies: PropTypes.shape({
     map: PropTypes.func,
   }),
@@ -132,4 +134,4 @@ const mapDispatchToProps = (dispatch) => ({
   quotationDispatch: (state) => dispatch(fetchQuotation(state)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);
+export default connect(mapStateToProps, mapDispatchToProps)(EditWalletForm);

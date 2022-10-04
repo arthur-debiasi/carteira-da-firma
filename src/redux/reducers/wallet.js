@@ -10,6 +10,7 @@ const TRY_REQUEST = 'TRY_REQUEST';
 const FETCH_API = 'FETCH_API';
 const FETCH_QUOTATION = 'FETCH_QUOTATION';
 const GOT_RESPONSE = 'GOT_RESPONSE';
+const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 function wallet(state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -19,6 +20,8 @@ function wallet(state = INITIAL_STATE, action) {
   case GOT_RESPONSE:
     console.log('sucesso de requisição!');
     return state;
+  case DELETE_EXPENSE:
+    return { ...state, expenses: action.payload };
   case FETCH_API:
     return { ...state, currencies: action.payload };
   case FETCH_QUOTATION:
