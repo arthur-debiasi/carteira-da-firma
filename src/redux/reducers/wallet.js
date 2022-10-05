@@ -11,6 +11,8 @@ const FETCH_API = 'FETCH_API';
 const FETCH_QUOTATION = 'FETCH_QUOTATION';
 const GOT_RESPONSE = 'GOT_RESPONSE';
 const DELETE_EXPENSE = 'DELETE_EXPENSE';
+const ID_TO_EDIT = 'ID_TO_EDIT';
+const EDIT_EXPENSE = 'EDIT_EXPENSE';
 
 function wallet(state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -26,6 +28,10 @@ function wallet(state = INITIAL_STATE, action) {
     return { ...state, currencies: action.payload };
   case FETCH_QUOTATION:
     return { ...state, expenses: [...state.expenses, action.payload] };
+  case ID_TO_EDIT:
+    return { ...state, idToEdit: action.payload, editor: action.editor };
+  case EDIT_EXPENSE:
+    return { ...state, expenses: action.payload, editor: action.editor };
   default:
     return state;
   }

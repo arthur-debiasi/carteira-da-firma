@@ -1,14 +1,38 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { deleteExpense } from '../redux/actions';
+import { deleteExpense, idToEditAction } from '../redux/actions';
+// import store from '../redux/store';
 
 class Table extends Component {
+  // state = { expensesCopy: [] };
+
+  // componentDidMount() {
+  //   const { expenses } = this.props;
+  //   this.setState({ expensesCopy: expenses });
+  //   // console.log(store.getState().wallet.expenses)
+  // }
+
+  // shouldComponentUpdate() {
+  //   const { expensesCopy } = this.state;
+
+  //   return expensesCopy !== store.getState().wallet.expenses;
+  // }
+
+  // componentDidUpdate() {
+  //   const { expenses } = this.props;
+  //   this.setState({ expensesCopy: expenses });
+  // }
+
   handleDeleteBtn = (id) => {
-    const { expenses, dispatch } = this.props;
+    const { expenses, deleteExpenseDispatch } = this.props;
     const expensesFiltered = expenses.filter((e) => e.id !== id);
-    console.log(expensesFiltered);
-    dispatch(deleteExpense(expensesFiltered));
+    deleteExpenseDispatch(expensesFiltered);
+  };
+
+  handleEditBtn = (id) => {
+    const { idToEditActionDispatch } = this.props;
+    idToEditActionDispatch(id);
   };
 
   render() {
@@ -54,6 +78,13 @@ class Table extends Component {
                 <td>
                   <button
                     type="button"
+                    data-testid="edit-btn"
+                    onClick={ () => this.handleEditBtn(id) }
+                  >
+                    Editar
+                  </button>
+                  <button
+                    type="button"
                     data-testid="delete-btn"
                     onClick={ () => this.handleDeleteBtn(id) }
                   >
@@ -64,7 +95,13 @@ class Table extends Component {
             ))}
           </tbody>
         </table>
-
+        {/* <button
+          type="button"
+          onClick={ () => console.log(store.getState().wallet.expenses) }
+        >
+          get state
+        </button> */}
+        {/* <button type="button" onClick={ () => this.forceUpdate() }>force update</button>  */}
       </div>
     );
   }
@@ -80,4 +117,9 @@ const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
-export default connect(mapStateToProps)(Table);
+const mapDispatchToProps = (dispatch) => ({
+  deleteExpenseDispatch: (state) => dispatch(deleteExpense(state)),
+  idToEditActionDispatch: (state) => dispatch(idToEditAction(state)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Table);

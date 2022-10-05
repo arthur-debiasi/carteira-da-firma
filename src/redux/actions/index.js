@@ -6,6 +6,8 @@ const FETCH_QUOTATION = 'FETCH_QUOTATION';
 const GOT_RESPONSE = 'GOT_RESPONSE';
 const ADD_EXPENSE = 'ADD_EXPENSE';
 const DELETE_EXPENSE = 'DELETE_EXPENSE';
+const ID_TO_EDIT = 'ID_TO_EDIT';
+const EDIT_EXPENSE = 'EDIT_EXPENSE';
 
 const addExpense = (payload) => ({ type: ADD_EXPENSE, payload });
 
@@ -20,6 +22,10 @@ const fetchAPI = (payload) => ({ type: FETCH_API, payload });
 const fetchCurrencies = (payload) => ({ type: FETCH_QUOTATION, payload });
 
 const gotResponse = () => ({ type: GOT_RESPONSE });
+
+const idToEditAction = (payload) => ({ type: ID_TO_EDIT, payload, editor: true });
+
+const editExpenseAction = (payload) => ({ type: EDIT_EXPENSE, payload, editor: false });
 
 const fetchCurrency = () => async (dispatch) => {
   dispatch(tryRequest());
@@ -48,4 +54,12 @@ const fetchQuotation = (expense) => async (dispatch) => {
   }
 };
 
-export { addExpense, newLogin, fetchCurrency, fetchQuotation, deleteExpense };
+export {
+  addExpense,
+  newLogin,
+  fetchCurrency,
+  fetchQuotation,
+  deleteExpense,
+  idToEditAction,
+  editExpenseAction,
+};

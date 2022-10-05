@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCurrency, fetchQuotation } from '../redux/actions';
+import { editExpenseAction, fetchCurrency, fetchQuotation } from '../redux/actions';
 
 class EditWalletForm extends Component {
   state = {
@@ -14,8 +14,10 @@ class EditWalletForm extends Component {
   };
 
   componentDidMount() {
-    // const { expenses } = this.props;
-    this.setState({});
+    const { idToEdit, expenses } = this.props;
+    const editingExpense = expenses[idToEdit];
+    const { value, description, method, tag, currency, id } = editingExpense;
+    this.setState({ value, description, method, tag, currency, id });
     const { currenciesDispatch } = this.props;
     currenciesDispatch();
   }
@@ -25,18 +27,25 @@ class EditWalletForm extends Component {
   };
 
   handleClick = () => {
-    const { quotationDispatch } = this.props;
+    const { editExpenseDispatch, expenses, idToEdit } = this.props;
     const { id, value, description, currency, method, tag } = this.state;
+    const xabla = expenses.find((e) => e.id === idToEdit);
+    console.log(xabla);
+    const index = expenses.indexOf(xabla);
 
-    quotationDispatch({ id, value, currency, method, tag, description });
-    this.setState({
-      value: '',
-      description: '',
-      method: 'cash',
-      tag: 'food',
-      currency: 'USD',
-      id: id + 1,
+    expenses.splice(index, 1, {
+      id,
+      value,
+      description,
+      currency,
+      method,
+      tag,
+      exchangeRates: xabla.exchangeRates,
     });
+
+    console.log(expenses); // 👉️ [ 'z', 'b', 'c' ]
+
+    editExpenseDispatch(expenses);
   };
 
   render() {
@@ -112,7 +121,7 @@ class EditWalletForm extends Component {
             <option value="Saúde">Saúde</option>
           </select>
         </label>
-        <button type="button" onClick={ this.handleClick }>Adicionar Despesa</button>
+        <button type="button" onClick={ this.handleClick }>Editar despesa</button>
       </form>
     );
   }
@@ -127,11 +136,14 @@ EditWalletForm.propTypes = {
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
   quotation: state.wallet.quotation,
+  idToEdit: state.wallet.idToEdit,
+  expenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   currenciesDispatch: () => dispatch(fetchCurrency()),
   quotationDispatch: (state) => dispatch(fetchQuotation(state)),
+  editExpenseDispatch: (state) => dispatch(editExpenseAction(state)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditWalletForm);

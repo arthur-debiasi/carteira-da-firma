@@ -14,8 +14,11 @@ class WalletForm extends Component {
   };
 
   componentDidMount() {
-    const { currenciesDispatch } = this.props;
+    const { currenciesDispatch, expenses } = this.props;
     currenciesDispatch();
+    this.setState({
+      id: expenses.length === 0 ? 0 : expenses[expenses.length - 1].id + 1,
+    });
   }
 
   handleChange = ({ target: { name, value } }) => {
@@ -125,6 +128,7 @@ WalletForm.propTypes = {
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
   quotation: state.wallet.quotation,
+  expenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
