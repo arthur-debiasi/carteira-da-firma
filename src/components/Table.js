@@ -2,28 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deleteExpense, idToEditAction } from '../redux/actions';
-// import store from '../redux/store';
 
 class Table extends Component {
-  // state = { expensesCopy: [] };
-
-  // componentDidMount() {
-  //   const { expenses } = this.props;
-  //   this.setState({ expensesCopy: expenses });
-  //   // console.log(store.getState().wallet.expenses)
-  // }
-
-  // shouldComponentUpdate() {
-  //   const { expensesCopy } = this.state;
-
-  //   return expensesCopy !== store.getState().wallet.expenses;
-  // }
-
-  // componentDidUpdate() {
-  //   const { expenses } = this.props;
-  //   this.setState({ expensesCopy: expenses });
-  // }
-
   handleDeleteBtn = (id) => {
     const { expenses, deleteExpenseDispatch } = this.props;
     const expensesFiltered = expenses.filter((e) => e.id !== id);
@@ -95,13 +75,6 @@ class Table extends Component {
             ))}
           </tbody>
         </table>
-        {/* <button
-          type="button"
-          onClick={ () => console.log(store.getState().wallet.expenses) }
-        >
-          get state
-        </button> */}
-        {/* <button type="button" onClick={ () => this.forceUpdate() }>force update</button> */}
       </div>
     );
   }

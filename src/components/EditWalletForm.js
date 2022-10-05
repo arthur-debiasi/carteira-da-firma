@@ -30,7 +30,6 @@ class EditWalletForm extends Component {
     const { editExpenseDispatch, expenses, idToEdit } = this.props;
     const { id, value, description, currency, method, tag } = this.state;
     const xabla = expenses.find((e) => e.id === idToEdit);
-    console.log(xabla);
     const index = expenses.indexOf(xabla);
 
     expenses.splice(index, 1, {
@@ -42,9 +41,6 @@ class EditWalletForm extends Component {
       tag,
       exchangeRates: xabla.exchangeRates,
     });
-
-    console.log(expenses); // 👉️ [ 'z', 'b', 'c' ]
-
     editExpenseDispatch(expenses);
   };
 

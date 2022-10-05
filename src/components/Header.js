@@ -12,7 +12,6 @@ class Header extends Component {
         <p data-testid="total-field">
           { expenses.reduce((acc, cur) => {
             const rate = Number(cur.exchangeRates[cur.currency].ask);
-            console.log(rate);
             return acc + Number(cur.value) * rate;
           }, 0).toFixed(2)}
         </p>
