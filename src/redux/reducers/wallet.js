@@ -31,7 +31,7 @@ function wallet(state = INITIAL_STATE, action) {
   case ID_TO_EDIT:
     return { ...state, idToEdit: action.payload, editor: action.editor };
   case EDIT_EXPENSE:
-    return { ...state, expenses: action.payload, editor: action.editor };
+    return { ...state, expenses: [...action.payload], editor: action.editor };
   default:
     return state;
   }

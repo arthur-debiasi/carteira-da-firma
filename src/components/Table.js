@@ -101,7 +101,7 @@ class Table extends Component {
         >
           get state
         </button> */}
-        {/* <button type="button" onClick={ () => this.forceUpdate() }>force update</button>  */}
+        {/* <button type="button" onClick={ () => this.forceUpdate() }>force update</button> */}
       </div>
     );
   }
