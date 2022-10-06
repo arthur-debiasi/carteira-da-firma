@@ -1,14 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ResponsiveFontSizes from './h3-mui';
 
 class Header extends Component {
   render() {
     const { email, expenses } = this.props;
     return (
       <div>
-        <h1>Carteira da Firma</h1>
-        <p data-testid="email-field">{ email }</p>
+        {ResponsiveFontSizes('Carteira da Firma', 'h2')}
+        <p data-testid="email-field">{ ResponsiveFontSizes(email, 'h6') }</p>
         <p data-testid="total-field">
           { expenses.reduce((acc, cur) => {
             const rate = Number(cur.exchangeRates[cur.currency].ask);
