@@ -7,24 +7,24 @@ import Table from '../components/Table';
 import WalletForm from '../components/WalletForm';
 
 class Wallet extends React.Component {
-  render() {
-    const { editor } = this.props;
-    return (
-      <div>
-        <Header />
-        { !editor ? <WalletForm /> : <EditWalletForm /> }
-        <Table />
-      </div>
-    );
-  }
+    render() {
+        const { editor } = this.props;
+        return (
+            <div>
+                <Header />
+                { !editor ? <WalletForm /> : <EditWalletForm /> }
+                <Table />
+            </div>
+        );
+    }
 }
 
 Wallet.propTypes = {
-  editor: PropTypes.string,
+    editor: PropTypes.string,
 }.isRequired;
 
 const mapStateToProps = (state) => ({
-  editor: state.wallet.editor,
+    editor: state.wallet.editor,
 });
 
 export default connect(mapStateToProps)(Wallet);

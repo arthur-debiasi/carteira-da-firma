@@ -28,37 +28,37 @@ const idToEditAction = (payload) => ({ type: ID_TO_EDIT, payload, editor: true }
 const editExpenseAction = (payload) => ({ type: EDIT_EXPENSE, payload, editor: false });
 
 const fetchCurrency = () => async (dispatch) => {
-  dispatch(tryRequest());
-  try {
-    const response = await fetch('https://economia.awesomeapi.com.br/json/all');
-    const result = await response.json();
-    delete result.USDT;
-    dispatch(fetchAPI(Object.keys(result)));
-    dispatch(gotResponse());
-  } catch (e) {
-    throw new Error(e);
-  }
+    dispatch(tryRequest());
+    try {
+        const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+        const result = await response.json();
+        delete result.USDT;
+        dispatch(fetchAPI(Object.keys(result)));
+        dispatch(gotResponse());
+    } catch (e) {
+        throw new Error(e);
+    }
 };
 
 const fetchQuotation = (expense) => async (dispatch) => {
-  dispatch(tryRequest());
-  try {
-    const response = await fetch('https://economia.awesomeapi.com.br/json/all');
-    const result = await response.json();
-    expense.exchangeRates = result;
-    dispatch(fetchCurrencies(expense));
-    dispatch(gotResponse());
-  } catch (e) {
-    throw new Error(e);
-  }
+    dispatch(tryRequest());
+    try {
+        const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+        const result = await response.json();
+        expense.exchangeRates = result;
+        dispatch(fetchCurrencies(expense));
+        dispatch(gotResponse());
+    } catch (e) {
+        throw new Error(e);
+    }
 };
 
 export {
-  addExpense,
-  newLogin,
-  fetchCurrency,
-  fetchQuotation,
-  deleteExpense,
-  idToEditAction,
-  editExpenseAction,
+    addExpense,
+    newLogin,
+    fetchCurrency,
+    fetchQuotation,
+    deleteExpense,
+    idToEditAction,
+    editExpenseAction,
 };
