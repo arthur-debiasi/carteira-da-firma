@@ -1,3 +1,4 @@
+import { Box, Button, FormControl, MenuItem, Select, Stack, TextField } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -48,77 +49,86 @@ class EditWallet extends Component {
         const { value, description, method, tag, currency } = this.state;
         const { currencies } = this.props;
         return (
-            <>
-                <label htmlFor="value-input">
-          Valor($):
-                    {' '}
-                    <input
-                        type="number"
-                        data-testid="value-input"
-                        id="value-input"
-                        name="value"
-                        value={ value }
-                        onChange={ this.handleChange }
-                    />
-                </label>
-                <label htmlFor="description-input">
-          Descrição:
-                    {' '}
-                    <textarea
-                        data-testid="description-input"
-                        id="description-input"
-                        name="description"
-                        value={ description }
-                        onChange={ this.handleChange }
-                    />
-                </label>
-                <label htmlFor="currency-input">
-          Moeda:
-                    {' '}
-                    <select
-                        name="currency"
-                        value={ currency }
-                        data-testid="currency-input"
-                        id="currency-input"
-                        onChange={ this.handleChange }
-                    >
-                        { currencies.map((e) => (<option key={ e } value={ e }>{e}</option>))}
-                    </select>
-                </label>
-                <label htmlFor="method-input">
-          Método de pagamento:
-                    {' '}
-                    <select
-                        name="method"
-                        value={ method }
-                        data-testid="method-input"
-                        id="method-input"
-                        onChange={ this.handleChange }
-                    >
-                        <option value="Dinheiro">Dinheiro</option>
-                        <option value="Cartão de crédito">Cartão de crédito</option>
-                        <option value="Cartão de débito">Cartão de débito</option>
-                    </select>
-                </label>
-                <label htmlFor="tag-input">
-          Tipo de gasto:
-                    {' '}
-                    <select
-                        name="tag"
-                        value={ tag }
-                        data-testid="tag-input"
-                        id="tag-input"
-                        onChange={ this.handleChange }
-                    >
-                        <option value="Alimentação">Alimentação</option>
-                        <option value="Lazer">Lazer</option>
-                        <option value="Trabalho">Trabalho</option>
-                        <option value="Transporte">Transporte</option>
-                        <option value="Saúde">Saúde</option>
-                    </select>
-                </label>
-                <button type="button" onClick={ this.handleClick }>Editar despesa</button>
-            </>
+            <FormControl className="form-add-expense" sx={{display: 'flex', flexDirection: 'row'}}>
+                <Box
+                    component="form"
+                    sx={{
+                        '& > :not(style)': { m: 1, width: '25ch' },
+                    }}
+                    noValidate
+                    autoComplete="off"
+                >
+                    <TextField type="number" id="outlined-basic" label="Valor" variant="outlined" value={value} name="value" onChange={this.handleChange} />
+                </Box>
+                <Box
+                    component="form"
+                    sx={{
+                        '& > :not(style)': { m: 1, width: '25ch' },
+                    }}
+                    noValidate
+                    autoComplete="off"
+                >
+                    <TextField type="text" id="outlined-basic" label="Descrição" variant="outlined" value={description} name="description" onChange={this.handleChange} />
+                </Box>
+                <Box sx={{ minWidth: 120 }}>
+                    <Stack sx={{ m: 1, minWidth: 180 }}>
+                        {/* <InputLabel id="demo-simple-select-label">Moeda</InputLabel> */}
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={currency}
+                            // label="Moeda"
+                            onChange={this.handleChange}
+                            name="currency"
+                        >
+                            { currencies.map((e) => (<MenuItem key={e} value={e}>{e}</MenuItem>))}
+                        </Select>
+                    </Stack>
+                </Box>
+                <Box sx={{ minWidth: 120 }}>
+                    <Stack sx={{ m: 1, minWidth: 180 }}>
+                        {/* <InputLabel id="demo-simple-select-label">Método de pagamento</InputLabel> */}
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={method}
+                            // label="Método de pagamento"
+                            onChange={this.handleChange}
+                            name="method"
+                        >
+                            <MenuItem value="Dinheiro">Dinheiro</MenuItem>
+                            <MenuItem value="Cartão de crédito">Cartão de crédito</MenuItem>
+                            <MenuItem value="Cartão de débito">Cartão de débito</MenuItem>
+                        </Select>
+                    </Stack>
+                </Box>
+                <Box sx={{ minWidth: 120 }}>
+                    <Stack sx={{ m: 1, minWidth: 180 }}>
+                        {/* <InputLabel id="demo-simple-select-label">Categoria</InputLabel> */}
+                        <Select
+                            labelId="tag-select-label"
+                            id="tag-select"
+                            value={tag}
+                            // label="Categoria"
+                            onChange={this.handleChange}
+                            name="tag"
+                        >
+                            <MenuItem value="Alimentação">Alimentação</MenuItem>
+                            <MenuItem value="Lazer">Lazer</MenuItem>
+                            <MenuItem value="Trabalho">Trabalho</MenuItem>
+                            <MenuItem value="Transporte">Transporte</MenuItem>
+                            <MenuItem value="Saúde">Saúde</MenuItem>
+                        </Select>
+                    </Stack>
+                </Box>
+                <Button
+                    variant="contained"
+                    type="button"
+                    onClick={this.handleClick}
+                >
+          Editar Despesa
+                </Button>
+            </FormControl>
         );
     }
 }

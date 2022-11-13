@@ -115,7 +115,7 @@ class WalletForm extends Component {
                             labelId="tag-select-label"
                             id="tag-select"
                             value={tag}
-                            label="Categoria"
+                            // label="Categoria"
                             onChange={this.handleChange}
                             name="tag"
                         >
