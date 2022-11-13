@@ -1,6 +1,5 @@
 import {
     Button,
-    Icon,
     Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
 } from '@mui/material';
 import PropTypes from 'prop-types';

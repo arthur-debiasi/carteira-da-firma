@@ -1,5 +1,5 @@
 import {
-    Box, Button, FormControl, InputLabel, MenuItem, Select, Stack, TextField,
+    Box, Button, FormControl, MenuItem, Select, Stack, TextField,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
