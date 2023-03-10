@@ -1,5 +1,4 @@
-# Trybe Wallet
-[Trybe](https://www.betrybe.com/) Project - Trybe Wallet React App.
+# [Trybe](https://www.betrybe.com/) Project - Trybe Wallet
 
 ## 💻 Project
 React App for personal expenses management.
